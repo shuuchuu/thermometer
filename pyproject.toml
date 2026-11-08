@@ -1,0 +1,64 @@
+[project]
+authors = [
+  {name = "m09", email = "142691+m09@users.noreply.github.com"},
+]
+dependencies = [
+  "rich >= 15",
+]
+description = "Temperature conversions: the end state of the shuuchuu package creation lab."
+homepage = "https://github.com/shuuchuu/thermometer"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+name = "thermometer-shuuchuu"
+readme = "README.md"
+requires-python = ">= 3.13"
+version = "0.2.0"
+
+[project.scripts]
+to-fahrenheit = "thermometer.cli:main"
+
+[dependency-groups]
+dev = [
+  "pyrefly >= 1.4",
+  "pytest >= 9",
+  "ruff >= 0.17",
+]
+
+[tool.ruff]
+target-version = "py313"
+
+[tool.ruff.lint]
+ignore = [
+  "D1",
+  "incorrect-blank-line-before-class",
+  "multi-line-summary-second-line",
+  "non-empty-init-module",
+]
+preview = true
+select = ["A", "B", "C", "D", "DOC", "E", "EM", "F", "I", "N", "PIE", "PTH", "RET", "RUF", "SIM", "SLF", "TC", "UP", "W"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+# Without a config, pyrefly falls back to its lenient "basic" preset. With one,
+# it stops treating the project root as an import root, so tests couldn't
+# import tests.conftest without search-path.
+[tool.pyrefly]
+search-path = ["."]
+
+[build-system]
+build-backend = "uv_build"
+requires = ["uv_build>=0.13.6,<0.14.0"]
+
+# Published as thermometer-shuuchuu, imported as the lab's package: `import
+# thermometer`.
+[tool.uv.build-backend]
+module-name = "thermometer"
+
+# Test PyPI is only for publishing: `explicit` keeps uv from looking for the
+# project's dependencies there, where rich only exists as 0.0.0.
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
