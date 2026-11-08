@@ -3,7 +3,9 @@ authors = [
   {name = "m09", email = "142691+m09@users.noreply.github.com"},
 ]
 dependencies = [
-  "rich >= 15",
+  # Colab pins its own rich (13.9.4 in 2026-11) for every install, a fresh
+  # virtual environment's included (UV_CONSTRAINT): a higher bound fails there.
+  "rich >= 13",
 ]
 description = "Temperature conversions: the end state of the shuuchuu package creation lab."
 homepage = "https://github.com/shuuchuu/thermometer"
@@ -12,7 +14,7 @@ license-files = ["LICENSE"]
 name = "thermometer-shuuchuu"
 readme = "README.md"
 requires-python = ">= 3.13"
-version = "0.2.0"
+version = "0.2.1"
 
 [project.scripts]
 to-fahrenheit = "thermometer.cli:main"
